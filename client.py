@@ -7,8 +7,16 @@ PORT = 8000
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((HOST, PORT))
 
-s.sendall('Hello, world')
-data = s.recv(1024)
-s.close()
+while True:
+	reply = raw_input("Chat (type 'x' to exit):")
+	if reply == 'x':
+		break
 
-print 'Received', repr(data)
+	s.sendall(reply)
+	data = s.recv(1024)
+
+	print data
+
+s.sendall('Good bye!')
+
+s.close()
